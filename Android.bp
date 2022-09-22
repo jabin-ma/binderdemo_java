@@ -1,0 +1,20 @@
+android_app {
+    name: "NativeClient",
+
+    certificate: "platform",
+
+    optimize: {
+        enabled: false,
+    },
+    platform_apis: true,
+    //sdk_version: "current",
+    srcs: ["src/**/*.java",
+           ":nativebinder_aidl"
+    ],
+
+    //aidl: {
+    //   local_include_dirs: ["aidl"],
+    //},
+}
+
+// additionally, build tests in sub-folders in a separate .apk

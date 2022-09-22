@@ -8,9 +8,10 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 import android.util.Log;
 import android.widget.Toast;
-
+import htzx.INativeService;
+import htzx.INativeSession;
 public class MyActivity extends Activity {
-    IMyService service;
+    INativeService service;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -19,9 +20,9 @@ public class MyActivity extends Activity {
         try {
             IBinder binder=ServiceManager.getService("com.android.majipeng.IMyService");
             Log.d("mjp","c++ binder:"+binder);
-            service=IMyService.Stub.asInterface(binder);
-            int say=service.say();
-            Toast.makeText(this,"Say:"+say,Toast.LENGTH_LONG).show();
+            service=INativeService.Stub.asInterface(binder);
+            INativeSession session = service.createSession();
+            session.sayMyName();
         }catch (Exception e){
             Log.e("mjp","MydemoError",e);
         }
